@@ -42,7 +42,9 @@ Add to your Maven configuration file `settings.xml` a server entry.
             <id>github-betanzos</id>
             <username>betanzos</username>
             <!-- Token with read-only permissions -->
-            <password>7f7dfc8489e112b30ec71dd0dfe9e1431fb4c92a</password>
+            <!-- Before to use this token replace ++NINE++ string (including the addition signs) with 9 -->
+            <!-- This is because GitHub detect the token in the commit and revokes it -->
+            <password>fc8209bc6f0d276c62dbd++NINE++f0ba4061f06b8041ec</password>
         </server>
     </servers>
 </settings>
