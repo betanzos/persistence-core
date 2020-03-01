@@ -13,33 +13,44 @@ This is a Maven project and its artifacts are published as GitHub Packages.
 In order to use it in your Maven project simply do the following (for use JPA with
 Hibernate as provider):
 
-**1 - Add to your Maven configuration file (`settings.xml`) a repository entry**
+**1 - Configure the repository in your project `pom.xml`**
+```xml
+<project>
+    <repositories>
+        <repository>
+            <id>github-betanzos</id>
+            <name>GitHub Maven Packages from betanzos</name>
+            <url>https://maven.pkg.github.com/betanzos/maven</url>
+        </repository>
+    </repositories>
+</project>
+```
+
+***Note:*** The previous piece is simplified, your actual file may have more content.
+
+**2 - Configure repository authentication**
+
+***DISCLAIMER:*** Until today (March 01, 2020) GitHub Packages requires authentication for read
+packages from both public and private repositories.
+
+Add to your Maven configuration file `settings.xml` a server entry.
+
 ```xml
 <settings>
-    <localRepository>/your/maven/repo/full-path</localRepository>
-
-    <profiles>
-        <profile>
-            <id>default-profile</id>
-            <repositories>
-                <repository>
-                    <id>github</id>
-                    <name>GitHub Maven Packages from betanzos</name>
-                    <url>https://maven.pkg.github.com/betanzos/maven</url>
-                </repository>
-            </repositories>
-        </profile>
-    </profiles>
-
-    <activeProfiles>
-        <activeProfile>default-profile</activeProfile>
-    </activeProfiles>
+    <servers>
+        <server>
+            <id>github-betanzos</id>
+            <username>betanzos</username>
+            <!-- Token with read-only permissions -->
+            <password>7f7dfc8489e112b30ec71dd0dfe9e1431fb4c92a</password>
+        </server>
+    </servers>
 </settings>
 ```
 
-The previous piece is simplified, your actual file may have more content.
+***Note:*** The previous piece is simplified, your actual file may have more content.
 
-**2 - Add needed dependencies entries to your project `POM.xml`**
+**3 - Add needed dependencies entries to your project `pom.xml`**
 ```xml
 <dependencies>
     <dependency>
@@ -63,7 +74,7 @@ The previous piece is simplified, your actual file may have more content.
 If you want to use a different database change the `h2` dependency for the appropriate
 JDBC driver dependency.
 
-**3 - Create the `persistence.xml` file under `src/main/resources/META-INF` directory**
+**4 - Create the `persistence.xml` file under `src/main/resources/META-INF` directory**
 ```xml
 <persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
@@ -96,7 +107,7 @@ value of the properties:
 - `javax.persistence.jdbc.password` 
 - `hibernate.dialect` 
 
-**4 - Create an `@Entity` class**
+**5 - Create an `@Entity` class**
 ```java
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -124,7 +135,7 @@ public class Person {
 }
 ```
 
-**5 - Create a repository class that extend from `JpaRepository` abstract class**
+**6 - Create a repository class that extend from `JpaRepository` abstract class**
 ```java
 import com.github.betanzos.persistence.repository.JpaReposytory;
 
@@ -137,7 +148,7 @@ public class PersonRepository extends JpaRepository<Person> {
 }
 ```
 
-**6 - Use your repository**
+**7 - Use your repository**
 ```java
 import com.github.betanzos.persistence.repository.Reposytory;
 
