@@ -16,24 +16,24 @@ Hibernate as provider):
 **1 - Add to your Maven configuration file (`settings.xml`) a repository entry**
 ```xml
 <settings>
-  <localRepository>/your/maven/repo/full-path</localRepository>
+    <localRepository>/your/maven/repo/full-path</localRepository>
 
-  <profiles>
-    <profile>
-      <id>default-profile</id>
-      <repositories>
-		<repository>
-          <id>github</id>
-          <name>GitHub Maven Packages from betanzos</name>
-          <url>https://maven.pkg.github.com/betanzos/maven</url>
-        </repository>
-      </repositories>
-    </profile>
-  </profiles>
+    <profiles>
+        <profile>
+            <id>default-profile</id>
+            <repositories>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub Maven Packages from betanzos</name>
+                    <url>https://maven.pkg.github.com/betanzos/maven</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 
-  <activeProfiles>
-    <activeProfile>default-profile</activeProfile>
-  </activeProfiles>
+    <activeProfiles>
+        <activeProfile>default-profile</activeProfile>
+    </activeProfiles>
 </settings>
 ```
 
